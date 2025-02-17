@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { TaskContext } from "../context/TaskProvider";
 
 const AddProjectPage = () => {
   const navigate = useNavigate();
+  const { addTask } = useContext(TaskContext);
   const [project, setProject] = useState({
     taskGroup: "Work",
     projectName: "",
     description: "",
     startDate: "",
     endDate: "",
-    priority: "Medium",  // Default Priority
+    priority: "Medium",
     tags: "",
   });
 
@@ -17,96 +19,42 @@ const AddProjectPage = () => {
     setProject({ ...project, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = () => {
+    const today = new Date().toISOString().split("T")[0];
+
+    if (!project.projectName.trim()) {
+      alert("Project name is required.");
+      return;
+    }
+    if (!project.startDate || project.startDate < today) {
+      alert("Start date should be today or later.");
+      return;
+    }
+
+    addTask({
+      id: Date.now(),
+      project: project.projectName,
+      task: project.description,
+      date: project.startDate,
+      priority: project.priority,
+      status: "To do",
+      statusColor: "bg-blue-400",
+    });
+
+    navigate("/tasklist");
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-[#f8f9fa] to-[#fff] px-6 py-4">
+      <h2 className="text-xl font-semibold">Add Project</h2>
       
-      {/* Header */}
-      <div className="flex justify-between w-full max-w-lg">
-        <button onClick={() => navigate(-1)}>⬅</button>
-        <h2 className="text-xl font-semibold">Add Project</h2>
-        <span>🔔</span>
-      </div>
+      <input type="text" name="projectName" placeholder="Project Name" value={project.projectName} onChange={handleChange} className="w-full max-w-lg p-3 border rounded-lg mt-4" />
 
-      {/* Task Group */}
-      <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md mt-4">
-        <label className="text-gray-600">Task Group</label>
-        <div className="flex justify-between items-center p-3 bg-gray-100 rounded-lg mt-2">
-          <span className="font-semibold">{project.taskGroup}</span>
-          <span>⬇</span>
-        </div>
-      </div>
+      <textarea name="description" placeholder="Description" value={project.description} onChange={handleChange} className="w-full max-w-lg p-3 border rounded-lg mt-4" rows="3"></textarea>
 
-      {/* Project Name */}
-      <input
-        type="text"
-        name="projectName"
-        placeholder="Project Name"
-        value={project.projectName}
-        onChange={handleChange}
-        className="w-full max-w-lg p-3 border rounded-lg mt-4"
-      />
+      <input type="date" name="startDate" value={project.startDate} onChange={handleChange} className="w-full max-w-lg p-3 border rounded-lg mt-4" />
 
-      {/* Description */}
-      <textarea
-        name="description"
-        placeholder="Description"
-        value={project.description}
-        onChange={handleChange}
-        className="w-full max-w-lg p-3 border rounded-lg mt-4"
-        rows="3"
-      ></textarea>
-
-      {/* Start Date Picker */}
-      <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md mt-4">
-        <label className="text-gray-600">Start Date</label>
-        <input 
-          type="date"
-          name="startDate"
-          value={project.startDate}
-          onChange={handleChange}
-          className="w-full mt-2 p-2 border rounded-lg"
-        />
-      </div>
-
-      {/* End Date Picker */}
-      <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md mt-4">
-        <label className="text-gray-600">End Date</label>
-        <input 
-          type="date"
-          name="endDate"
-          value={project.endDate}
-          onChange={handleChange}
-          className="w-full mt-2 p-2 border rounded-lg"
-        />
-      </div>
-
-      {/* Task Priority */}
-      <div className="w-full max-w-lg bg-white p-4 rounded-lg shadow-md mt-4">
-        <label className="text-gray-600">Priority</label>
-        <select
-          name="priority"
-          value={project.priority}
-          onChange={handleChange}
-          className="w-full mt-2 p-2 border rounded-lg"
-        >
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-      </div>
-
-      {/* Tags */}
-      <input
-        type="text"
-        name="tags"
-        placeholder="Add tags (comma separated)"
-        value={project.tags}
-        onChange={handleChange}
-        className="w-full max-w-lg p-3 border rounded-lg mt-4"
-      />
-
-      {/* Add Project Button */}
-      <button className="w-full max-w-lg bg-purple-600 text-white p-3 rounded-lg mt-6 font-semibold hover:bg-purple-700">
+      <button onClick={handleSubmit} className="w-full max-w-lg bg-purple-600 text-white p-3 rounded-lg mt-6 font-semibold hover:bg-purple-700">
         Add Project
       </button>
     </div>

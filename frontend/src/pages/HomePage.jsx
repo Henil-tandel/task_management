@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import illustration from "../assets/illustration.png"; // Uncomment when image is available
+import illustration from "../assets/illustration.png"; 
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const HomePage = () => {
       
       {/* Illustration */}
       <div className="relative w-64 h-64 flex justify-center">
-        {/* <img src={illustration} alt="Illustration" className="w-full object-cover" /> */}
+        <img src={illustration} alt="Illustration" className="w-[85%] object-cover" />
         
         {/* Floating Elements */}
         <div className="absolute top-4 left-10 w-6 h-6 bg-blue-400 rounded-full"></div>

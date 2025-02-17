@@ -11,39 +11,33 @@ This is a task management application designed to help you manage your tasks and
 - **Header**: Display the header with navigation options.
 - **Date Selector**: Select dates to filter tasks.
 - **Bottom Navigation**: Navigate between different pages of the application.
+- **Login Page**: Allows users to log in to their account.
+- **Register Page**: Allows users to create a new account.
+- **User Protected Wrapper**: Ensures that only authenticated users can access certain routes.
 
-## Installation
+## New Components and Features
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/task_management.git
-   ```
+### BottomNavigation Component
+The `BottomNavigation` component provides a fixed navigation bar at the bottom of the screen with buttons to navigate to the Home, Add Project, and Task List pages.
 
-2. Navigate to the project directory:
-   ```bash
-   cd task_management/frontend
-   ```
+LoginPage 
+The LoginPage allows users to log in to their account. It includes a form for entering email and password, and handles authentication by checking the credentials against stored user data.
 
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
+### RegisterPage
+The RegisterPage allows users to create a new account. It includes a form for entering name, email, and password, and stores the new user data in local storage.
 
-4. Start the development server:
-   ```bash
-   npm start
-   ```
+### UserProtectedWrapper Component
+The UserProtectedWrapper component ensures that only authenticated users can access certain routes. If a user is not logged in, they are redirected to the login page.
 
 ## Usage
-
 - **Home Page**: Click on "Let's Start" to navigate to the task list page.
 - **Add Project Page**: Fill in the project details and click "Add Project" to add a new project.
 - **Task List Page**: Use the search bar, filter options, and sort dropdown to manage tasks. Click on the "+" button in the bottom navigation to add a new project.
+- **Login Page**: Enter your email and password to log in.
+- **Register Page**: Enter your name, email, and password to create a new account.
 
 ## Contributing
-
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-## License
-
+License
 This project is licensed under the MIT License.

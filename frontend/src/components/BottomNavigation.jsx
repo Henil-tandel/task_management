@@ -1,25 +1,31 @@
 import React from "react";
 import { FaHome, FaCalendarAlt, FaPlus, FaList, FaUser } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 const BottomNavigation = () => {
-  const navigate = useNavigate(); // ✅ Initialize navigate function
+  const navigate = useNavigate();
 
   return (
     <div className="fixed bottom-0 w-full bg-white py-3 shadow-lg flex justify-around items-center">
-      <FaHome className="text-gray-500 text-2xl" />
-      <FaCalendarAlt className="text-gray-500 text-2xl" />
+      {/* Home Button */}
+      <FaHome 
+        className="text-gray-500 text-2xl cursor-pointer"
+        onClick={() => navigate("/")} // Navigate to Home
+      />
 
-      {/* ✅ Wrap in button & Add onClick for navigation */}
+      {/* Add Project Button */}
       <button
         className="bg-purple-600 p-4 rounded-full shadow-lg"
-        onClick={() => navigate("/add-project")}
+        onClick={() => navigate("/add-project")} // Navigate to Add Project page
       >
         <FaPlus className="text-white text-2xl" />
       </button>
 
-      <FaList className="text-gray-500 text-2xl" />
-      <FaUser className="text-gray-500 text-2xl" />
+      {/* Task List Button */}
+      <FaList 
+        className="text-gray-500 text-2xl cursor-pointer"
+        onClick={() => navigate("/tasks")} // Navigate to Task List page
+      />
     </div>
   );
 };
