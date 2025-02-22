@@ -53,6 +53,7 @@ This project is a backend for a task management application. It includes user au
 
 - `POST /api/users/register`: Register a new user.
 - `POST /api/users/login`: Login a user.
+- `GET /api/users/profile`: Get user profile (protected).
 
 ### Task Routes
 
@@ -64,10 +65,33 @@ This project is a backend for a task management application. It includes user au
 
 ## Installation
 
-1. Clone the repository.
-2. Run `npm install` to install dependencies.
-3. Create a `.env` file with the required environment variables.
-4. Run `npm start` to start the server.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/task_management.git
+   ```
+
+2. Navigate to the backend directory:
+   ```bash
+   cd task_management/backend
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables:
+   Create a `.env` file in the backend directory and add the following:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
+
+5. Start the backend server:
+   ```bash
+   npm start
+   ```
 
 ## Dependencies
 
@@ -76,7 +100,7 @@ This project is a backend for a task management application. It includes user au
 - `jsonwebtoken`: For generating and verifying JWT tokens.
 - `dotenv`: For loading environment variables from a `.env` file.
 - `bcryptjs`: For hashing passwords.
-- `socket.io`: For real-time communication.
+- `cors`: For enabling Cross-Origin Resource Sharing.
 
 ## Scripts
 
