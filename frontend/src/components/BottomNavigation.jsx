@@ -16,7 +16,7 @@ const BottomNavigation = () => {
       {/* Add Project Button */}
       <button
         className="bg-purple-600 p-4 rounded-full shadow-lg"
-        onClick={() => navigate("/add-project")} // Navigate to Add Project page
+        onClick={() => navigate("/add-tasks")} // Navigate to Add Project page
       >
         <FaPlus className="text-white text-2xl" />
       </button>
