@@ -1,56 +1,54 @@
-import React, { useState, useContext } from "react";
-import { TaskContext } from "../context/TaskProvider";
+import { useContext, useEffect, useState } from "react";
+import { TaskContext } from "../context/TaskContext";
 import TaskCard from "../components/TaskCard";
-import TaskFilter from "../components/TaskFilter";
 import Header from "../components/Header";
-import BottomNavigation from "../components/BottomNavigation"; // Import BottomNavigation
+import BottomNavigation from "../components/BottomNavigation";
 
 const TaskListPage = () => {
   const { tasks } = useContext(TaskContext);
-  const [activeFilter, setActiveFilter] = useState("All");
   const [searchDate, setSearchDate] = useState("");
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
-  // Filter tasks by status and date
-  const filteredTasks = tasks
-    .filter((task) => {
-      if (activeFilter === "All") return true;
-      return task.status === activeFilter;
-    })
-    .filter((task) => {
-      if (!searchDate) return true; // If no date is selected, return all tasks
-      return task.date === searchDate; // Filter by exact date
-    });
-
-  const handleDateChange = (e) => {
-    setSearchDate(e.target.value);
-  };
+  useEffect(() => {
+    if (!Array.isArray(tasks)) {
+      setFilteredTasks([]);
+    } else {
+      setFilteredTasks(
+        tasks.filter((task) => !searchDate || task.dueDate === searchDate)
+      );
+    }
+  }, [tasks, searchDate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f8f9fa] to-[#fff] px-4 py-6 flex flex-col">
       <Header />
-      
-      {/* Date Search Input */}
+
       <div className="flex justify-center mt-4">
         <input
           type="date"
           value={searchDate}
-          onChange={handleDateChange}
+          onChange={(e) => setSearchDate(e.target.value)}
           className="w-full max-w-lg p-3 border rounded-lg"
         />
       </div>
 
-      {/* Task Filter Component */}
-      <TaskFilter activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-
       <div className="mt-4 space-y-4 flex-grow">
         {filteredTasks.length > 0 ? (
-          filteredTasks.map((task) => <TaskCard key={task.id} {...task} />)
+          filteredTasks.map((task) => (
+            <TaskCard
+              key={task._id}
+              project={task.title}
+              task={task.description}
+              time={task.dueDate}
+              status="Pending"
+              statusColor="bg-yellow-500"
+            />
+          ))
         ) : (
           <p className="text-gray-500 text-center mt-6">No tasks available</p>
         )}
       </div>
 
-      {/* Include Bottom Navigation at the bottom */}
       <BottomNavigation />
     </div>
   );
