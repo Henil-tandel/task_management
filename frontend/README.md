@@ -20,7 +20,7 @@ This is a task management application designed to help you manage your tasks and
 ### BottomNavigation Component
 The `BottomNavigation` component provides a fixed navigation bar at the bottom of the screen with buttons to navigate to the Home, Add Project, and Task List pages.
 
-LoginPage 
+### LoginPage
 The LoginPage allows users to log in to their account. It includes a form for entering email and password, and handles authentication by checking the credentials against stored user data.
 
 ### RegisterPage
@@ -29,7 +29,36 @@ The RegisterPage allows users to create a new account. It includes a form for en
 ### UserProtectedWrapper Component
 The UserProtectedWrapper component ensures that only authenticated users can access certain routes. If a user is not logged in, they are redirected to the login page.
 
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/task_management.git
+   ```
+
+2. Navigate to the frontend directory:
+   ```bash
+   cd task_management/frontend
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables:
+   Create a `.env` file in the frontend directory and add the following:
+   ```env
+   VITE_BASE_URL=http://localhost:5000
+   ```
+
+5. Start the development server:
+   ```bash
+   npm start
+   ```
+
 ## Usage
+
 - **Home Page**: Click on "Let's Start" to navigate to the task list page.
 - **Add Project Page**: Fill in the project details and click "Add Project" to add a new project.
 - **Task List Page**: Use the search bar, filter options, and sort dropdown to manage tasks. Click on the "+" button in the bottom navigation to add a new project.
@@ -37,7 +66,9 @@ The UserProtectedWrapper component ensures that only authenticated users can acc
 - **Register Page**: Enter your name, email, and password to create a new account.
 
 ## Contributing
+
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-License
+## License
+
 This project is licensed under the MIT License.
